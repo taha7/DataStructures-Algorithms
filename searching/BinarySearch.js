@@ -14,6 +14,7 @@ function binarySearch(arr, elem) {
 
 // console.log(binarySearch(x, 100));
 
+// you should made it without slice if slice takes time
 function iBinarySearch(arr, elem) {
 	let x = 0;
 	for (let i in arr) {
