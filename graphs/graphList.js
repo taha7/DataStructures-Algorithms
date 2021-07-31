@@ -40,4 +40,59 @@ class Graph {
             );
         }
     }
+
+    dfsVisitRec(startingVertex) {
+        const visited = {};
+
+        function visit(vertex) {
+            if (!vertex) {
+                return null;
+            }
+
+            visited[vertex] = true;
+
+            this.adjacencyList[vertex].forEach((adjacency) => {
+                if (!visited[adjacency]) {
+                    visit(adjacency);
+                }
+            });
+        }
+        visit = visit.bind(this);
+        visit(startingVertex);
+
+        return Object.keys(visited);
+    }
+
+    dfsVisitIterative(start) {
+        let visited = {};
+        let stack = [start];
+        while (stack.length) {
+            let vertex = stack.pop();
+
+            if (!visited[vertex]) {
+                visited[vertex] = true;
+                this.adjacencyList[vertex].forEach((adjacency) => {
+                    stack.push(adjacency);
+                });
+            }
+        }
+
+        return Object.keys(visited);
+    }
+
+    bfsVisitIterative(start) {
+      
+    }
 }
+
+const g = new Graph();
+
+g.addEdge("A", "B");
+g.addEdge("A", "C");
+g.addEdge("B", "D");
+g.addEdge("C", "E");
+g.addEdge("D", "E");
+g.addEdge("D", "F");
+g.addEdge("E", "F");
+
+console.log(g.dfsVisitIterative("A"));
